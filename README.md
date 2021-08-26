@@ -1,5 +1,5 @@
-# RouteFlow
- Simple file routing for express. Unlike other packages, RouteFlow uses express's own `Router()` function instead of a custom made one.
+# Express Super Router
+ Simple file routing for express. Unlike other packages, Express Super Router uses express's own `Router()` function instead of a custom made one.
 
  ## Getting Started
  - [Usage](Usage)
@@ -11,11 +11,11 @@
 
 ```js
 //	ES6 modules
-import routeflow from 'routeflow';
+import superrouter from 'express-super-router';
 import express from 'express';
 
 //	CommonJS
-const routeflow = require('routeflow');
+const superrouter = require('express-super-router');
 const express = require('exress');
 
 const app = express();
@@ -23,7 +23,7 @@ app.use(express.json());
 
 //	Adding routes
 
-app.use('/api', routeflow('./src/routes'));
+app.use('/api', superrouter('./src/routes'));
 //	all Router instances within 'src/routes' will now be added
 
 app.listen(8080);
@@ -31,28 +31,28 @@ app.listen(8080);
 
 ##	Installation
 
-- yarn: `yarn add routeflow`
-- npm: `npm i routeflow`
+- yarn: `yarn add express-super-router`
+- npm: `npm i express-super-router`
 
 ##	Documentation 
 
-### Function `routeflow`
-The main function for Routeflow, this will pretty much be the only function you need.
+### Function `superrouter`
+The main function for Express Super Router, this will pretty much be the only function you need.
 ```ts
-routeflow(dir: string, options?: RouteflowOptions): Express.Router
+superrouter(dir: string, options?: SuperRouteOptions): Express.Router
 ```
 Example:
 ```ts
 const express = require('express');
-const routeflow = require('routeflow');
+const superrouter = require('express-super-router');
 
-express.use('/api', routeflow('src/routes'));
+express.use('/api', superrouter('src/routes'));
 ```
 
-### Interface `RouteflowOptions`
-Simple interface for the options of the routeflow function
+### Interface `SuperRouterOptions`
+Simple interface for the options of the Express Super Router function
 ```ts
-interface RouteflowOptions {
+interface SuperRouterOptions {
 	recursive?: boolean,
 	ignorePrefix?: string
 }
@@ -76,10 +76,10 @@ module.export = route;
 ```
 
 ###	Name refferences
- routeflow only changes the express name refferences slightly for params, instead of using `:id` you should use `[id]`
+ Express Super Router only changes the express name refferences slightly for params, instead of using `:id` you should use `[id]`
 
  examples:
  - `/index.js` => `/`
- - `/index/about.ts` => `/index/about`
- - `/` => `/`
- - `/` => `/`
+ - `/index/about.js` => `/index/about`
+ - `/users/[id].js` => `/users/:id`
+ - `/files/[user][repo]` => `/files/:user/:repo`

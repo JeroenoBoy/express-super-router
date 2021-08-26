@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import { join } from "path";
 import { infoText } from "../../scripts/utils";
-import routeFlow from "../../src";
+import superrouter from "../../src";
 
 const app = express();
 
@@ -10,6 +10,6 @@ const app = express();
 if(process.env.RUN_EXAMPLE === 'true') app.use(morgan(infoText(':method :url :status :response-time ms')));
 
 app.use(express.json());
-app.use(routeFlow(join(__dirname, 'routes')));
+app.use(superrouter(join(__dirname, 'routes')));
 
 export default app;

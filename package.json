@@ -1,5 +1,5 @@
 {
-  "name": "routeflow",
+  "name": "express-super-router",
   "description": "Create an advanced express api with ease!",
   "version": "1.0.0",
   "main": "dist/index.js",
@@ -16,13 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JeroenoBoy/RouteFlow.git"
+    "url": "git+https://github.com/JeroenoBoy/express-super-router.git"
   },
   "keywords": [
     "NodeJS",
-    "typescript",
-    "ts-node",
-    "RouteFlow",
+    "express-super-router",
     "route",
     "router",
     "express",
@@ -33,9 +31,9 @@
   "author": "Jeroeno_Boy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JeroenoBoy/RouteFlow/issues"
+    "url": "https://github.com/JeroenoBoy/express-super-router/issues"
   },
-  "homepage": "https://github.com/JeroenoBoy/RouteFlow#readme",
+  "homepage": "https://github.com/JeroenoBoy/express-super-router#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.1",

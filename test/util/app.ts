@@ -1,10 +1,8 @@
 import express from "express";
-import routeFlow from "../../src";
-
-
+import superrouter from "../../src";
 
 const app = express();
 app.use(express.json());
-app.use(routeFlow('test/util/routes'));
+app.use(superrouter('test/util/routes'));
 
 export default app;

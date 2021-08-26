@@ -6,9 +6,9 @@ import FS from 'fs';
 const ROOT_PATH = process.cwd();
 
 
-export interface RouteflowOptions {
+export interface SuperRouterOptions {
 	/**
-	 * Should Routeflow recursively check the file paths?
+	 * Should Express Super Router recursively check the file paths?
 	 * @default true
 	 */
 	recursive?: boolean,
@@ -20,7 +20,7 @@ export interface RouteflowOptions {
 	ignorePrefix?: string
 }
 
-export default function routeFlow(dir: string, options: RouteflowOptions = {}) {
+export default function superrouter(dir: string, options: SuperRouterOptions = {}) {
 	const ROUTER = Router({ mergeParams: true });
 
 	const opts = Object.assign(options, {

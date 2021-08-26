@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import { exec } from 'child_process';
+import { info } from './utils';
 
 const bundleDir = '.bundle';
 
@@ -10,23 +11,23 @@ const bundleDir = '.bundle';
 	//	Replacing directory
 	
 	if(fs.existsSync(bundleDir)) {
-		console.log('Clearing bundle dir');
+		info('Clearing bundle dir');
 		fs.rmSync(bundleDir, { recursive: true, force: true});
 	}
 	else {
-		console.log('Creating bundle dir');
+		info('Creating bundle dir');
 		fs.mkdirSync(bundleDir);
 	}
 	
 	//	Building source
 	
-	console.log('Building source');
+	info('Building source');
 	await build();
-	console.log('Source builded');
+	info('Source builded');
 
 	//	Copying files
 
-	console.log('Copying files')
+	info('Copying files')
 
 	await copyFolder('src');
 	copyFile('package.json');
@@ -53,10 +54,9 @@ function copyFolder(src: string) {
 
 function build() {
 	return new Promise<void>((res) => {
-		exec('yarn build', (err, b, e2) => {
+		exec('yarn build', (err, b) => {
 			if(err) throw err;
-			console.log(b);
-			console.log(e2);
+			info(b)
 			res();
 		});
 	})

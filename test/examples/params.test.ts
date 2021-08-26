@@ -4,8 +4,6 @@ import { users } from "../../examples/params/routes/users";
 
 describe('Routing params', () => {
 
-	const agent = supertest(app);
-
 	it.each([
 		[0, false],
 		[1, false],
@@ -13,38 +11,52 @@ describe('Routing params', () => {
 		[3, false],
 		[4, false],
 		[100, true]
-	])('Checks if user %n exists', (index, error) => {
-		agent.get('/users/'+index)
+	])('Checks if user %n exists', async (index, error) => {
+		await supertest(app).get('/users/'+index)
 			.expect(200)
-			.expect('Content-Type', 'application/json')
-			.expect(error ? { code: 404, message: 'User not found' } : users[index])
+			.expect('Content-Type', 'application/json; charset=utf-8')
+			.expect(error ? { code: 404, message: 'User not found' } : {id: index, ...users[index]})
+			.then()
 	})
 
 
-	it('Lists every user', () => {
-		agent.get('/users')
+	it('Lists every user', (done) => {
+		supertest(app).get('/users')
 			.expect(200)
-			.expect('Content-Type', 'application/json')
+			.expect('Content-Type', 'application/json; charset=utf-8')
 			.expect(({body}) => {
 				expect(body).toBeInstanceOf(Array);
 			})
+			.end(done)
 	});
 
 
-	it('Checks if Raphtalia is best girl', () => {
+	// function cbHandler(...callbacks: ((next: () => void) => any)[]) {
+	// 	let i = 0;
+	// 	const next = () => callbacks.length == i ?? callbacks[i++](next);
+	// 	next();
+	// }
+
+
+	it('Checks if Raphtalia is best girl', async () => {
 		let id = -1;
-		agent.get('/users')
+
+		await supertest(app)
+			.get('/users')
 			.expect(200)
-			.expect('Content-Type', 'application/json')
+			.expect('Content-Type', 'application/json; charset=utf-8')
 			.expect(({body}) => {
 				id = body.find((d: any)=>d.name=='Raphtalia')!.id as number
 			})
-		agent.get(`/users/${id}`)
+			.then()
+
+		await supertest(app)
+			.get(`/users/${id}`)
 			.expect(200)
-			.expect('Content-Type', 'application/json')
+			.expect('Content-Type', 'application/json; charset=utf-8')
 			.expect((res) => {
 				expect(res.body.tags).toContain('Best Girl 💖');
-				console.log('Raphtalia best girl 💖')
 			})
+			.then()
 	})
 })

@@ -20,7 +20,7 @@ describe('Tests parseRoute()', () => {
 		['/index.ts', '/'],
 		['/index232.ts', '/index232'],
 		['/abcindex.ts', '/abcindex'],
-		['/index/abc.ts', '/abc'],
+		['/index/abc.ts', '/index/abc'],
 	])('should remove index propperly '+result, testToBe)
 
 

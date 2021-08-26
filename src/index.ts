@@ -20,7 +20,7 @@ export interface RouteflowOptions {
 	ignorePrefix?: string
 }
 
-export default function routeFlow(routes: string, options: RouteflowOptions = {}) {
+export default function routeFlow(dir: string, options: RouteflowOptions = {}) {
 	const ROUTER = Router({ mergeParams: true });
 
 	const opts = Object.assign(options, {
@@ -58,7 +58,7 @@ export default function routeFlow(routes: string, options: RouteflowOptions = {}
 		if(!exports.mergeParams) exports.mergeParams = true;
 	}
 
-	readFolders(getRoot(routes), '');
+	readFolders(getRoot(dir), '');
 
 	return ROUTER;
 }
@@ -71,8 +71,8 @@ export function getRoot(dir: string) {
 
 
 export function parseRoute(route: string) {
-	return route.match(/^(.*)\.[tj]s$/)![1]		//	Removes file extension
-		.replace(/\/index(?!\w)/g, '/')			//	Removes 'index' and turns to '/' 
+	return route.match(/^(.*)\.[tj]s$/)![1]		//	Removes file extension, also removes index if requires
+		.replace(/\/index$/, '/')				//	Removes index file name
 		.replace(/\[(\w+)\]/g, '/:$1/')			//	Parses Params
 		.replace(/\/{2,}/g, '/')				//	Removes '/{2,}' and turns into '/'
 		.replace(/^(.+)\/$/, '$1');				//	Remove trailing /'s

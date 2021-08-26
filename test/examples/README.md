@@ -1,0 +1,1 @@
+Examples also act as testing grounds, because it makes life easier.
